@@ -1,0 +1,7 @@
+.key {
+  border: 2px solid black;
+  display: block;
+  width: fit-content;
+  height: fit-content;
+  padding: 1em;
+}
