@@ -1,9 +1,14 @@
 window.onkeydown = listenKeyDown;
 window.onkeyup = listenKeyUp;
 
+// FIXME:
+// La sequenza:
+//              Alt down > Maiusc down > Alt up > Maiusc up
+// lascia Alt colorato. Succede non solo per Alt, ma anche per
+// Home/End e le 4 frecce. Non succede per Ctrl.
+//
 function listenKeyDown(e) {
-  console.log('down')
-  console.log(e)
+  //console.log(e)
   if (e.altKey) {
     document.getElementById('alt').style.background = '#00ff00';
   }
@@ -13,26 +18,14 @@ function listenKeyDown(e) {
   if (e.shiftKey) {
     document.getElementById('shift').style.background = '#00ff00';
   }
-  if (e.key == document.getElementById('End')) {
-    document.getElementById('End').style.background = '#00ff00';
-  }
-  if (e.key == 'ArrowLeft') {
-    document.getElementById('ArrowLeft').style.background = '#00ff00';
-  }
-  if (e.key == 'ArrowRight') {
-    document.getElementById('ArrowRight').style.background = '#00ff00';
-  }
-  if (e.key == 'ArrowUp') {
-    document.getElementById('ArrowUp').style.background = '#00ff00';
-  }
-  if (e.key == 'ArrowDown') {
-    document.getElementById('ArrowDown').style.background = '#00ff00';
+  let elem = document.getElementById(e.key);
+  if (elem && !e.altKey && !e.ctrlKey && !e.shiftKey) {
+    elem.style.background = '#00ff00';
   }
 }
 
 function listenKeyUp(e) {
-  console.log('up')
-  console.log(e)
+  //console.log(e)
   if (e.altKey) {
     document.getElementById('alt').style.background = 'none';
   }
@@ -42,19 +35,8 @@ function listenKeyUp(e) {
   if (e.shiftKey) {
     document.getElementById('shift').style.background = 'none';
   }
-  if (e.key == 'End') {
-    document.getElementById('End').style.background = 'none';
-  }
-  if (e.key == 'ArrowLeft') {
-    document.getElementById('ArrowLeft').style.background = 'none';
-  }
-  if (e.key == 'ArrowRight') {
-    document.getElementById('ArrowRight').style.background = 'none';
-  }
-  if (e.key == 'ArrowUp') {
-    document.getElementById('ArrowUp').style.background = 'none';
-  }
-  if (e.key == 'ArrowDown') {
-    document.getElementById('ArrowDown').style.background = 'none';
+  let elem = document.getElementById(e.key);
+  if (elem && !e.altKey && !e.ctrlKey && !e.shiftKey) {
+    document.getElementById(e.key).style.background = 'none';
   }
 }
