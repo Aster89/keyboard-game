@@ -9,6 +9,10 @@
   --base-key-width: var(--key-height);
   --backspace-width: calc(2 * var(--base-key-width));
   --ctrl-width: calc(5.0 / 4.0 * var(--base-key-width));
+  --tab-width: calc(1.5 * var(--base-key-width));
+  --capslock-width: calc(1.8 * var(--base-key-width));
+  --enter-major-width: calc(3 * var(--base-key-width) - var(--tab-width));
+  --enter-minor-width: calc(3 * var(--base-key-width) - var(--capslock-width));
   background: black;
   color: white;
 }
@@ -139,11 +143,11 @@
 }
 
 #Tab {
-  width: calc(1.5 * var(--base-key-width));
+  width: var(--tab-width);
 }
 
 #CapsLock {
-  width: calc(1.8 * var(--base-key-width));
+  width: var(--capslock-width);
 }
 
 #Backspace {
@@ -171,6 +175,20 @@
   max-width: var(--ctrl-width);
 }
 
+.top-letters::after {
+  padding: 2em 0 0 2em;
+  content: "Enter";
+  border: 2px solid;
+  border-bottom-width: 0;
+  width: var(--enter-major-width);
+}
+
+.mid-letters::after {
+  content: "";
+  border: 2px solid;
+  border-top-width: 0;
+  width: var(--enter-minor-width);
+}
 
 /* Key labels */
 #Meta::after {
@@ -207,4 +225,12 @@
 
 #ControlLeft::after {
   content: "Ctrl";
+}
+
+#PageUp::after {
+  content: "Pag↑";
+}
+
+#PageDown::after {
+  content: "Pag↓";
 }
