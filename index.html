@@ -1,13 +1,139 @@
 <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
 <script src="main.js" charset="utf-8"></script>
-<div class="key" id="alt">Alt</div>
-<div class="key" id="ctrl">Ctrl</div>
-<div class="key" id="shift">Maiusc</div>
-<div class="key" id="End">Fine</div>
-<div class="key" id="Home">Inizio</div>
-<div class="arrow-keys">
-  <div class="key grid-item" id="ArrowUp">Sopra</div>
-  <div class="key grid-item" id="ArrowLeft">Sinistra</div>
-  <div class="key grid-item" id="ArrowDown">Sotto</div>
-  <div class="key grid-item" id="ArrowRight">Destra</div>
+
+<div class="main-grid">
+  <div class="escape flex block">
+    <div class="key" id="Escape">Esc</div>
+    <div class="flex function-keys">
+      <div class="flex">
+        <div class="key" id="F1">F1</div>
+        <div class="key" id="F2">F2</div>
+        <div class="key" id="F3">F3</div>
+        <div class="key" id="F4">F4</div>
+      </div>
+      <div class="flex">
+        <div class="key" id="F5">F5</div>
+        <div class="key" id="F6">F6</div>
+        <div class="key" id="F7">F7</div>
+        <div class="key" id="F8">F8</div>
+      </div>
+      <div class="flex">
+        <div class="key" id="F9">F9</div>
+        <div class="key" id="F10">F10</div>
+        <div class="key" id="F11">F11</div>
+        <div class="key" id="F12">F12</div>
+      </div>
+    </div>
+  </div>
+  <div class="other-keys-2 flex block">
+    <div class="key grid-item" id="Print">Stampa</div>
+    <div class="key grid-item" id="ScrollLock">Scroll</div>
+    <div class="key grid-item" id="Pause">Pausa</div>
+  </div>
+  <div class="letters block">
+    <div class="flex numbers">
+      <div class="key" id="\">\</div>
+      <div class="key" id="1">1</div>
+      <div class="key" id="2">2</div>
+      <div class="key" id="3">3</div>
+      <div class="key" id="4">4</div>
+      <div class="key" id="5">5</div>
+      <div class="key" id="6">6</div>
+      <div class="key" id="7">7</div>
+      <div class="key" id="8">8</div>
+      <div class="key" id="9">9</div>
+      <div class="key" id="0">0</div>
+      <div class="key" id="'">'</div>
+      <div class="key" id="ì">ì</div>
+      <div class="key" id="Backspace"></div>
+    </div>
+    <div class="flex top-letters">
+      <div class="key" id="Tab"></div>
+      <div class="key" id="q">Q</div>
+      <div class="key" id="w">W</div>
+      <div class="key" id="e">E</div>
+      <div class="key" id="r">R</div>
+      <div class="key" id="t">T</div>
+      <div class="key" id="y">Y</div>
+      <div class="key" id="u">U</div>
+      <div class="key" id="i">I</div>
+      <div class="key" id="o">O</div>
+      <div class="key" id="p">P</div>
+      <div class="key" id="è">è</div>
+      <div class="key" id="+">+</div>
+    </div>
+    <div class="flex mid-letters">
+      <div class="key" id="CapsLock"></div>
+      <div class="key" id="a">A</div>
+      <div class="key" id="s">S</div>
+      <div class="key" id="d">D</div>
+      <div class="key" id="f">F</div>
+      <div class="key" id="g">G</div>
+      <div class="key" id="h">H</div>
+      <div class="key" id="j">J</div>
+      <div class="key" id="k">K</div>
+      <div class="key" id="l">L</div>
+      <div class="key" id="ò">ò</div>
+      <div class="key" id="à">à</div>
+      <div class="key" id="ù">ù</div>
+    </div>
+    <div class="flex bot-letters">
+      <div class="key" id="ShiftLeft">⇧</div>
+      <div class="key" id="<">&lt;</div>
+      <div class="key" id="z">Z</div>
+      <div class="key" id="x">X</div>
+      <div class="key" id="c">C</div>
+      <div class="key" id="v">V</div>
+      <div class="key" id="b">B</div>
+      <div class="key" id="n">N</div>
+      <div class="key" id="m">M</div>
+      <div class="key" id=",">,</div>
+      <div class="key" id=".">.</div>
+      <div class="key" id="-">-</div>
+      <div class="key" id="ShiftRight">⇧</div>
+    </div>
+    <div class="flex spacebar">
+      <div class="key" id="CtrlLeft"></div>
+      <div class="key" id="Meta"></div>
+      <div class="key" id="Alt">Alt</div>
+      <div class="key" id="Space">Spazio</div>
+      <div class="key" id="AltGraph">AltGr</div>
+      <div class="key" id="Fn">Fn</div>
+      <div class="key" id="ContextMenu">Menu</div>
+      <div class="key" id="CtrlRight">Ctrl</div>
+    </div>
+  </div>
+  <div class="grid-2x3 other-keys block">
+    <div class="key" id="Insert">Ins</div>
+    <div class="key" id="Home">Inizio</div>
+    <div class="key" id="PageUp">PgUp</div>
+    <div class="key" id="Delete">Del</div>
+    <div class="key" id="End">Fine</div>
+    <div class="key" id="PageDown">PgDown</div>
+  </div>
+  <div class="grid-2x3 arrows block">
+    <div class="key grid-item" id="ArrowUp"></div>
+    <div class="key grid-item" id="ArrowLeft"></div>
+    <div class="key grid-item" id="ArrowDown"></div>
+    <div class="key grid-item" id="ArrowRight"></div>
+  </div>
+  <div class="num-keypad">
+    <div class="key grid-item" id="NumLock">Num</div>
+    <div class="key grid-item" id="NumpadDivide">/</div>
+    <div class="key grid-item" id="NumpadMultiply">*</div>
+    <div class="key grid-item" id="NumpadSubtract">-</div>
+    <div class="key grid-item" id="NumpadAdd">+</div>
+    <div class="key grid-item" id="Numpad0">0</div>
+    <div class="key grid-item" id="Numpad1">1</div>
+    <div class="key grid-item" id="Numpad2">2</div>
+    <div class="key grid-item" id="Numpad3">3</div>
+    <div class="key grid-item" id="Numpad4">4</div>
+    <div class="key grid-item" id="Numpad5">5</div>
+    <div class="key grid-item" id="Numpad6">6</div>
+    <div class="key grid-item" id="Numpad7">7</div>
+    <div class="key grid-item" id="Numpad8">8</div>
+    <div class="key grid-item" id="Numpad9">9</div>
+    <div class="key grid-item" id="NumpadDecimal">.</div>
+    <div class="key grid-item" id="NumpadEnter">Enter</div>
+  </div>
 </div>

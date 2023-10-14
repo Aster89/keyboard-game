@@ -8,35 +8,37 @@ window.onkeyup = listenKeyUp;
 // Home/End e le 4 frecce. Non succede per Ctrl.
 //
 function listenKeyDown(e) {
-  //console.log(e)
+  console.log(e)
   if (e.altKey) {
-    document.getElementById('alt').style.background = '#00ff00';
+    document.getElementById('Alt').style.background = '#00ff00';
   }
   if (e.ctrlKey) {
-    document.getElementById('ctrl').style.background = '#00ff00';
+    document.getElementById('CtrlLeft').style.background = '#00ff00';
   }
   if (e.shiftKey) {
-    document.getElementById('shift').style.background = '#00ff00';
+    document.getElementById('ShiftLeft').style.background = '#00ff00';
   }
-  let elem = document.getElementById(e.key);
+  let key = e.key != ' ' ? e.key : 'Space';
+  let elem = document.getElementById(key);
   if (elem && !e.altKey && !e.ctrlKey && !e.shiftKey) {
     elem.style.background = '#00ff00';
   }
 }
 
 function listenKeyUp(e) {
-  //console.log(e)
+  console.log(e)
   if (e.altKey) {
-    document.getElementById('alt').style.background = 'none';
+    document.getElementById('Alt').style.background = 'none';
   }
   if (e.ctrlKey) {
-    document.getElementById('ctrl').style.background = 'none';
+    document.getElementById('CtrlLeft').style.background = 'none';
   }
   if (e.shiftKey) {
-    document.getElementById('shift').style.background = 'none';
+    document.getElementById('ShiftLeft').style.background = 'none';
   }
-  let elem = document.getElementById(e.key);
+  let key = e.key != ' ' ? e.key : 'Space';
+  let elem = document.getElementById(key);
   if (elem && !e.altKey && !e.ctrlKey && !e.shiftKey) {
-    document.getElementById(e.key).style.background = 'none';
+    document.getElementById(key).style.background = 'none';
   }
 }
