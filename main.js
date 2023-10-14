@@ -6,52 +6,37 @@ window.onkeyup = listenKeyUp;
 //              Alt down > Maiusc down > Alt up > Maiusc up
 // lascia Alt colorato. Succede non solo per Alt, ma anche per
 // Home/End e le 4 frecce. Non succede per Ctrl.
-//
-// TODO:
-// Per ottenere il tasto relativo a un codice:
-// await navigator.keyboard.getLayoutMap().then(klm => klm.get(e.code))
-function listenKeyDown(e) {
-  console.log(e)
-  if (e.altKey) {
-    document.getElementById('Alt').style.background = '#00ff00';
-  }
-  if (e.ctrlKey) {
-    document.getElementById(e.code).style.background = '#00ff00';
-  }
-  if (e.shiftKey) {
-    document.getElementById('ShiftLeft').style.background = '#00ff00';
-  }
-  let key = e.key;
-  if (key >= '0' && key <= '9') {
-    key = e.code;
-  }
-  if (key == ' ')
-    key = 'Space';
-  let elem = document.getElementById(key);
-  if (elem && !e.altKey && !e.ctrlKey && !e.shiftKey) {
-    elem.style.background = '#00ff00';
-  }
+
+async function getKey(e) {
+  let maybe_key = await navigator.keyboard.getLayoutMap().then(klm => klm.get(e.code));
+  return maybe_key ? maybe_key : e.key;
 }
 
-function listenKeyUp(e) {
+async function listenKeyDown(e) {
   console.log(e)
-  if (e.altKey) {
-    document.getElementById('Alt').style.background = 'none';
+  let elem = await getElementByEvent(e);
+  elem.style.background = '#00ff00';
+}
+
+async function listenKeyUp(e) {
+  console.log(e)
+  let elem = await getElementByEvent(e);
+  elem.style.background = 'none';
+}
+
+async function getElementByEvent(e) {
+  let key = await getKey(e);
+  if (key == 'AltGraph') {
+    key = 'AltRight';
   }
-  if (e.ctrlKey) {
-    document.getElementById(e.code).style.background = 'none';
+  if (key == ' ') {
+    key = 'Space';
   }
-  if (e.shiftKey) {
-    document.getElementById('ShiftLeft').style.background = 'none';
-  }
-  let key = e.key;
-  if (key >= '0' && key <= '9') {
+  if (key >= '0' && key <= '9' || e.code.startsWith('Numpad')
+                               || e.key == 'Shift'
+                               || e.key == 'Control'
+                               || e.key == 'Alt') {
     key = e.code;
   }
-  if (key == ' ')
-    key = 'Space';
-  let elem = document.getElementById(key);
-  if (elem && !e.altKey && !e.ctrlKey && !e.shiftKey) {
-    document.getElementById(key).style.background = 'none';
-  }
+  return document.getElementById(key);
 }
