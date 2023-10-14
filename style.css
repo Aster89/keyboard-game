@@ -33,6 +33,7 @@
 }
 
 .main-grid {
+  margin: auto;
   width: fit-content;
   border: 1px solid white;
   padding: var(--base-key-width);
@@ -95,6 +96,28 @@
   width: initial;
 }
 
+#Numpad1,
+#Numpad2,
+#Numpad3 {
+  grid-row: 4;
+}
+
+#Numpad4,
+#Numpad5,
+#Numpad6 {
+  grid-row: 3;
+}
+
+#Numpad2 {
+  grid-row: 4;
+  width: initial;
+}
+
+#Numpad3 {
+  grid-row: 4;
+  width: initial;
+}
+
 .grid-2x3 {
   height: fit-content;
   width: fit-content;
@@ -135,14 +158,14 @@
   width: -webkit-fill-available;
 }
 
-#CtrlLeft,
+#ControlLeft,
 #ShiftLeft,
 #Meta,
 #Alt,
 #AltGraph,
 #Fn,
 #ContextMenu,
-#CtrlRight {
+#ControlRight {
   width: var(--ctrl-width);
   min-width: var(--ctrl-width);
   max-width: var(--ctrl-width);
@@ -182,6 +205,6 @@
   content: "⇦";
 }
 
-#CtrlLeft::after {
+#ControlLeft::after {
   content: "Ctrl";
 }
