@@ -24,6 +24,10 @@
   padding: 1em;
 }
 
+.key.pressed {
+  background: limegreen;
+}
+
 .function-keys {
   flex: auto;
 }
