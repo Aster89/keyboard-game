@@ -11,13 +11,27 @@ let makeSpan = text => {
 
 let makebreak = () => document.createElement('br');
 
-let p = document.createElement('p');
-p.classList.add('text');
-text
-  .split('\n')
-  .flatMap(line => line.split('').map(makeSpan).concat([makebreak(), makebreak()]))
-  .forEach(elem => { p.appendChild(elem); });
+let par = (() => {
+  let p = document.createElement('p');
+  p.classList.add('text');
 
-let keyboard = document.getElementsByTagName('body')[0].children[0];
+  text
+    .split('\n')
+    .flatMap(line => line.split('').map(makeSpan).concat([makebreak(), makebreak()]))
+    .forEach(elem => { p.appendChild(elem); });
 
-document.body.insertBefore(p, keyboard);
+  let keyboard = document.getElementsByTagName('body')[0].children[0];
+
+  document.body.insertBefore(p, keyboard);
+  return p;
+})();
+
+let chars = document.getElementsByClassName('text')[0].children.length;
+
+let cursor = document.createElement('span');
+cursor.classList.add('cursor');
+cursor.classList.add('blinking');
+
+let rndspan = par.children[Math.floor(Math.random() * chars)];
+
+par.insertBefore(cursor, rndspan);
