@@ -1,7 +1,5 @@
-window.onload =  hit_key;
 window.onkeydown = listenKeyDown;
 window.onkeyup = listenKeyUp;
-
 
 // TODO:
 // Per la selezione del testo una strategia sembra essere quella
@@ -18,21 +16,12 @@ window.onkeyup = listenKeyUp;
 // lascia Alt colorato. Succede non solo per Alt, ma anche per
 // Home/End e le 4 frecce. Non succede per Ctrl.
 
-function hit_key() {
-  window.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Escape'}));
-  window.dispatchEvent(new KeyboardEvent('keyup', {'key': 'Escape'}));
-}
-
 async function listenKeyDown(e) {
-  console.log(e)
-  document.getElementById('CapsLock').style.background =
-    e.getModifierState('CapsLock') ? '#00ff00' : 'none';
   let elem = await getElementByEvent(e);
   elem.style.background = '#00ff00';
 }
 
 async function listenKeyUp(e) {
-  console.log(e)
   let elem = await getElementByEvent(e);
   elem.style.background = 'none';
 }
