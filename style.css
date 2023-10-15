@@ -13,8 +13,11 @@
   --capslock-width: calc(1.8 * var(--base-key-width));
   --enter-major-width: calc(3 * var(--base-key-width) - var(--tab-width));
   --enter-minor-width: calc(3 * var(--base-key-width) - var(--capslock-width));
-  background: black;
-  color: white;
+  --dark-grey: #333333;
+  --light-grey: #bbbbbb;
+  --target: #444444;
+  background: var(--dark-grey);
+  color: var(--light-grey);
 }
 
 .text {
@@ -201,6 +204,29 @@
   border: 2px solid;
   border-top-width: 0;
   width: var(--enter-minor-width);
+}
+
+.target {
+  background-color: var(--target);
+  border: 1px solid #999;
+}
+
+.blinking {
+  animation: blink-animation 1s steps(5, start) infinite;
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+.cursor::after {
+  display: inline-block;
+  content: "";
+  height: 1em;
+  margin-bottom: -0.2em;
+  border: 1px solid #999;
 }
 
 /* Key labels */
