@@ -2,6 +2,16 @@ window.onload =  hit_key;
 window.onkeydown = listenKeyDown;
 window.onkeyup = listenKeyUp;
 
+
+// TODO:
+// Per la selezione del testo una strategia sembra essere quella
+// di avvolgere ogni parola (anzi, nel mio caso ogni singolo carattere)
+// all'interno di uno <span>; questi avranno informazioni circa il loro
+// posizionamento orizzontale e verticale, le quali mi sono necessarie
+// a muovere il cursore opportunamente.
+// https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetLeft
+// https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+
 // FIXME:
 // La sequenza:
 //              Alt down > Maiusc down > Alt up > Maiusc up

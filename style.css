@@ -16,6 +16,7 @@
   --dark-grey: #333333;
   --light-grey: #bbbbbb;
   --target: #444444;
+  --cursor-width: 1px;
   background: var(--dark-grey);
   color: var(--light-grey);
 }
@@ -25,6 +26,10 @@
   font-size: 2em;
   margin: auto;
   padding: 1em;
+}
+
+span[id^=word] {
+  color: cyan;
 }
 
 .flex {
@@ -226,7 +231,8 @@
   content: "";
   height: 1em;
   margin-bottom: -0.2em;
-  border: 1px solid #999;
+  border: var(--cursor-width) solid #999;
+  margin-right: calc(-2 * var(--cursor-width));
 }
 
 /* Key labels */
