@@ -1,0 +1,19 @@
+.blinking {
+  animation: blink-animation 1s steps(5, start) infinite;
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+.cursor::after {
+  display: inline-block;
+  content: "";
+  height: 1em;
+  margin-bottom: -0.2em;
+  border: var(--cursor-width) solid #999;
+  margin-right: calc(-2 * var(--cursor-width));
+}
