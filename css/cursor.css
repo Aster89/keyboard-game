@@ -9,7 +9,7 @@
   }
 }
 
-.cursor::after {
+#cursor::after {
   display: inline-block;
   content: "";
   height: 1.2em;

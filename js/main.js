@@ -9,6 +9,15 @@ window.onkeyup = listenKeyUp;
 
 async function listenKeyDown(e) {
   press(await getKeyByEvent(e));
+  console.log(cursor.getAttribute('pos'))
+  if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
+    let offset = 'ArrowLeft' == e.key ? -1 : 1;
+    let newpos = Number(cursor.getAttribute('pos')) + offset;
+    let text = document.getElementById('text');
+    text.insertBefore(cursor, text.children[newpos]);
+    cursor.setAttribute('pos', newpos);
+  }
+  console.log(cursor.getAttribute('pos'))
 }
 
 async function listenKeyUp(e) {
