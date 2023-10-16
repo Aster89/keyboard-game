@@ -15,7 +15,7 @@ body {
   color: var(--light-grey);
 }
 
-#text {
+#tokenized-text {
   width: fit-content;
   font-size: 2em;
   margin: auto;

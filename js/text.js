@@ -13,7 +13,7 @@ let makebreak = () => document.createElement('br');
 
 let par = (() => {
   let p = document.createElement('p');
-  p.id = 'text';
+  p.id = 'tokenized-text';
 
   text
     .split('\n')
@@ -26,7 +26,7 @@ let par = (() => {
   return p;
 })();
 
-let chars = document.getElementById('text').children.length;
+let chars = document.getElementById('tokenized-text').children.length;
 
 let cursor = document.createElement('span');
 cursor.id = 'cursor';
