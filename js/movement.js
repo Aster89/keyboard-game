@@ -8,16 +8,15 @@ function advance(steps, dir) {
 }
 
 function eow(dir) {
-  return 3;
+  let curpos = Number(cursor.getAttribute('pos'));
+  return dir == 1
+    ? RegExp(/^ *([a-zA-Z0-9]+|.|\n)/).exec(text.substr(curpos))[0].length
+    : RegExp(/([a-zA-Z0-9]+|.|\n) *$/).exec(text.substr(0, curpos))[0].length;
 }
 
 function movecursor(e) {
   if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
-    let steps = 1;
     let dir = e.key == 'ArrowLeft' ? -1 : 1;
-    if (e.ctrlKey) {
-      steps = eow(dir);
-    }
-    advance(steps, dir);
+    advance(e.ctrlKey ? eow(dir) : 1, dir);
   }
 }
