@@ -9,7 +9,7 @@ window.onkeyup = listenKeyUp;
 
 async function listenKeyDown(e) {
   press(await getKeyByEvent(e));
-  move(e.key);
+  movecursor(e);
 }
 
 async function listenKeyUp(e) {
