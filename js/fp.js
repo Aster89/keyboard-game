@@ -9,3 +9,5 @@ groupBy = b => xs => {
     });
     return res;
 };
+
+minus = x => y => y - x;
