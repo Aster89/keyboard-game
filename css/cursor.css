@@ -10,7 +10,6 @@
 }
 
 #cursor::after {
-  display: inline-block;
   content: "";
   height: 1.2em;
   margin-bottom: -0.2em;
