@@ -5,7 +5,7 @@
 * {
   --dark-grey: #333333;
   --light-grey: #bbbbbb;
-  --target: #444444;
+  --target: rgba(0, 255, 255, 15%);
   --cursor-width: 1px;
   --cursor-color: cyan;
 }
@@ -22,7 +22,10 @@ body {
   padding: 1em;
 }
 
-.target {
+.highlighted ~ span {
   background-color: var(--target);
-  border: 1px solid #999;
+}
+
+.highlighted ~ .highlighted ~ span {
+  background-color: initial;
 }

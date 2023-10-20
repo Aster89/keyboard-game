@@ -10,6 +10,7 @@
 }
 
 #cursor::after {
+  position: relative;
   content: "";
   height: 1.2em;
   margin-bottom: -0.2em;
