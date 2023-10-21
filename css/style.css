@@ -1,6 +1,7 @@
 @import url('border-box-fix.css');
 @import url('keyboard.css');
 @import url('cursor.css');
+@import url('selection.css');
 
 * {
   --dark-grey: #333333;
@@ -23,51 +24,3 @@ body {
   padding: 1em;
 }
 
-span.target-beg,
-.target-beg ~ span {
-  background-color: var(--target);
-}
-
-span.target-end,
-.target-end ~ span {
-  background-color: initial;
-}
-
-.target-beg ~ span.highlighted-end,
-.target-beg ~ .highlighted-end ~ span {
-  background-color: var(--target);
-}
-
-.target-beg ~ .target-end ~ span.highlighted-end,
-.target-beg ~ .target-end ~ .highlighted-end ~ span {
-  background-color: initial;
-}
-
-span.highlighted-beg,
-.highlighted-beg ~ span {
-  background-color: var(--highlighted);
-}
-
-.highlighted-end ~ span.target-beg,
-.highlighted-end ~ .target-beg ~ span {
-  background-color: var(--target);
-}
-
-.highlighted-end ~ span.target-end,
-.highlighted-end ~ .target-end ~ span,
-span.highlighted-end,
-.highlighted-end ~ span,
-span.highlighted-end.target-end,
-.highlighted-end.target-end ~ span {
-  background-color: initial;
-}
-
-span.highlighted-end.target-beg,
-.highlighted-end.target-beg ~ span {
-  background-color: var(--target);
-}
-
-.highlighted-end ~ span.target-end,
-.highlighted-end ~ .target-end ~ span {
-  background-color: initial;
-}
