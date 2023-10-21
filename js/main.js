@@ -9,7 +9,9 @@ window.onkeyup = listenKeyUp;
 
 async function listenKeyDown(e) {
   press(await getKeyByEvent(e));
-  movecursor(e);
+  if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+    movecursor(e);
+  }
 }
 
 async function listenKeyUp(e) {
