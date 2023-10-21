@@ -19,16 +19,16 @@ let higher_lefter = (elem, cur) => elem.offsetTop < cur.offsetTop && elem.offset
 let lower_rigther = (elem, cur) => elem.offsetTop > cur.offsetTop && elem.offsetLeft > cur.offsetLeft;
 let isspan = elem => elem.tagName == 'SPAN';
 
-let highlight_mode = false;
+let selection_mode = false;
 
 function movecursor(e) {
-  if (e.shiftKey && !highlight_mode) {
-    highlight_mode = true;
-    start_highlighting();
+  if (e.shiftKey && !selection_mode) {
+    selection_mode = true;
+    start_selection();
   }
-  if (!e.shiftKey && highlight_mode) {
-    highlight_mode = false;
-    remove_highlighting();
+  if (!e.shiftKey && selection_mode) {
+    selection_mode = false;
+    remove_selection();
   }
   if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
     let dir = e.key == 'ArrowLeft' ? -1 : 1;
@@ -57,25 +57,25 @@ function movecursor(e) {
     let winner = displs.indexOf(Math.min(...displs));
     advance(offset + dir * (winner - (dir + 1)/2 - 1), dir);
   }
-  if (highlighting_start != undefined) {
+  if (selection_start != undefined) {
     let curpos = Number(par.children['cursor'].getAttribute('pos'));
   }
 }
 
-let highlighting_start = undefined;
+let selection_start = undefined;
 
-let start_highlighting = () => {
-  cursor.classList.add('highlighted-end');
+let start_selection = () => {
+  cursor.classList.add('selection-end');
   let tokens = document.getElementById('tokenized-text');
   let curpos = Number(cursor.getAttribute('pos'));
-  highlighting_start = tokens.children[curpos + 1];
-  highlighting_start.classList.add('highlighted-beg');
+  selection_start = tokens.children[curpos + 1];
+  selection_start.classList.add('selection-beg');
 };
 
-let remove_highlighting = () => {
-  cursor.classList.remove('highlighted-end');
-  highlighting_start.classList.remove('highlighted-beg');
+let remove_selection = () => {
+  cursor.classList.remove('selection-end');
+  selection_start.classList.remove('selection-beg');
   let tokens = document.getElementById('tokenized-text');
   let curpos = Number(cursor.getAttribute('pos'));
-  highlighting_start = tokens.children[curpos + 1];
+  selection_start = tokens.children[curpos + 1];
 };

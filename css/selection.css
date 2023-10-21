@@ -8,41 +8,41 @@ span.target-end,
   background-color: initial;
 }
 
-.target-beg ~ span.highlighted-end,
-.target-beg ~ .highlighted-end ~ span {
+.target-beg ~ span.selection-end,
+.target-beg ~ .selection-end ~ span {
   background-color: var(--target);
 }
 
-.target-beg ~ .target-end ~ span.highlighted-end,
-.target-beg ~ .target-end ~ .highlighted-end ~ span {
+.target-beg ~ .target-end ~ span.selection-end,
+.target-beg ~ .target-end ~ .selection-end ~ span {
   background-color: initial;
 }
 
-span.highlighted-beg,
-.highlighted-beg ~ span {
-  background-color: var(--highlighted);
+span.selection-beg,
+.selection-beg ~ span {
+  background-color: var(--selected);
 }
 
-.highlighted-end ~ span.target-beg,
-.highlighted-end ~ .target-beg ~ span {
+.selection-end ~ span.target-beg,
+.selection-end ~ .target-beg ~ span {
   background-color: var(--target);
 }
 
-.highlighted-end ~ span.target-end,
-.highlighted-end ~ .target-end ~ span,
-span.highlighted-end,
-.highlighted-end ~ span,
-span.highlighted-end.target-end,
-.highlighted-end.target-end ~ span {
+.selection-end ~ span.target-end,
+.selection-end ~ .target-end ~ span,
+span.selection-end,
+.selection-end ~ span,
+span.selection-end.target-end,
+.selection-end.target-end ~ span {
   background-color: initial;
 }
 
-span.highlighted-end.target-beg,
-.highlighted-end.target-beg ~ span {
+span.selection-end.target-beg,
+.selection-end.target-beg ~ span {
   background-color: var(--target);
 }
 
-.highlighted-end ~ span.target-end,
-.highlighted-end ~ .target-end ~ span {
+.selection-end ~ span.target-end,
+.selection-end ~ .target-end ~ span {
   background-color: initial;
 }

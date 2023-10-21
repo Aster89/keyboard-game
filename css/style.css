@@ -7,7 +7,7 @@
   --dark-grey: #333333;
   --light-grey: #bbbbbb;
   --target: rgba(0, 255, 255, 15%);
-  --highlighted: rgba(0, 255, 255, 40%);
+  --selected: rgba(0, 255, 255, 40%);
   --cursor-width: 1px;
   --cursor-color: cyan;
 }
