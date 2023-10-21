@@ -22,10 +22,11 @@ body {
   padding: 1em;
 }
 
-.highlighted ~ span {
+.highlighting-target,
+.highlighting-target ~ span {
   background-color: var(--target);
 }
 
-.highlighted ~ .highlighted ~ span {
+.highlighting-target ~ .highlighting-target ~ span {
   background-color: initial;
 }

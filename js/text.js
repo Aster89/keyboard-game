@@ -39,7 +39,7 @@ let chars = document.getElementById('tokenized-text').children.length;
 
 [Math.floor(Math.random() * chars), Math.floor(Math.random() * chars)]
   .sort()
-  .map(pos => par.insertBefore(makeSpanWithClass('highlighted'), par.children[pos]));
+  .map(pos => par.children[pos].classList.add('highlighting-target'));
 
 let cursor = makeSpan();
 cursor.id = 'cursor';
