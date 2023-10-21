@@ -1,3 +1,4 @@
+let movement_keys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
 
 function advance(steps, dir) {
   let offset = steps * dir;
