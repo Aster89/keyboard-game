@@ -1,6 +1,7 @@
 let movement_keys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
 
 function advance(steps, dir) {
+  "use strict";
   let offset = steps * dir;
   let tokens = document.getElementById('tokenized-text');
   let curpos = Number(cursor.getAttribute('pos'));
@@ -9,6 +10,7 @@ function advance(steps, dir) {
 }
 
 function stride(dir) {
+  "use strict";
   let curpos = Number(cursor.getAttribute('pos'));
   return dir == 1
     ? RegExp(/^ *([a-zA-Z0-9]+|.|\n)/).exec(text.substr(curpos))[0].length
@@ -20,10 +22,11 @@ let lower_rigther = (elem, cur) => elem.offsetTop > cur.offsetTop && elem.offset
 let isspan = elem => elem.tagName == 'SPAN';
 
 function movecursor(e) {
-  if (e.shiftKey && !selection.active) {
+  "use strict";
+  if (e.shiftKey && !selection.active()) {
     selection.start();
   }
-  if (!e.shiftKey && selection.active) {
+  if (!e.shiftKey && selection.active()) {
     selection.clear();
   }
   if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
@@ -53,11 +56,10 @@ function movecursor(e) {
     let winner = displs.indexOf(Math.min(...displs));
     advance(offset + dir * (winner - (dir + 1)/2 - 1), dir);
   }
-  if (selection.begin_pos != undefined) {
+  if (selection.active()) {
     let curpos = Number(par.children['cursor'].getAttribute('pos'));
-    if (selection.dir == 1 && selection.begin_pos > curpos) {
-      selection.invert();
-    } else if (selection.dir == -1 && selection.begin_pos <= curpos) {
+    if (selection.forward() && selection.begin_pos() > curpos
+      || selection.backward() && selection.begin_pos() <= curpos) {
       selection.invert();
     }
   }
