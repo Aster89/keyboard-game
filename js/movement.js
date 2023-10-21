@@ -21,6 +21,15 @@ let isspan = elem => elem.tagName == 'SPAN';
 
 let selection_mode = false;
 
+function invert_selection_dir(argument) {
+  let end = document.getElementsByClassName('selection-end')[0];
+  end.classList.remove('selection-end');
+  let beg = document.getElementsByClassName('selection-beg')[0];
+  beg.classList.remove('selection-beg');
+  end.classList.add('selection-beg');
+  beg.classList.add('selection-end');
+}
+
 function movecursor(e) {
   if (e.shiftKey && !selection_mode) {
     selection_mode = true;
@@ -57,25 +66,39 @@ function movecursor(e) {
     let winner = displs.indexOf(Math.min(...displs));
     advance(offset + dir * (winner - (dir + 1)/2 - 1), dir);
   }
-  if (selection_start != undefined) {
+  if (selection_start_pos != undefined) {
     let curpos = Number(par.children['cursor'].getAttribute('pos'));
+    if (selection_dir == 1 && selection_start_pos > curpos) {
+      selection_dir = -1;
+      invert_selection_dir();
+    } else if (selection_dir == -1 && selection_start_pos <= curpos) {
+      selection_dir = 1;
+      invert_selection_dir();
+    }
   }
 }
 
+let selection_start_pos = undefined;
 let selection_start = undefined;
+let selection_dir = 1;
 
 let start_selection = () => {
   cursor.classList.add('selection-end');
   let tokens = document.getElementById('tokenized-text');
   let curpos = Number(cursor.getAttribute('pos'));
-  selection_start = tokens.children[curpos + 1];
+  selection_start_pos = curpos + 1;
+  selection_start = tokens.children[selection_start_pos];
   selection_start.classList.add('selection-beg');
 };
 
 let remove_selection = () => {
-  cursor.classList.remove('selection-end');
+  cursor.classList.remove('selection-beg'); // TODO: remove both or check
+  cursor.classList.remove('selection-end'); // TODO: and remove only one?
   selection_start.classList.remove('selection-beg');
+  selection_start.classList.remove('selection-end');
+  selection_dir = 1;
   let tokens = document.getElementById('tokenized-text');
   let curpos = Number(cursor.getAttribute('pos'));
+  selection_start_pos = undefined;
   selection_start = tokens.children[curpos + 1];
 };
