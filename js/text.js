@@ -38,8 +38,8 @@ console.assert(text.length + 1/* trailing line break */ == par.children.length);
 let chars = document.getElementById('tokenized-text').children.length;
 
 [Math.floor(Math.random() * chars), Math.floor(Math.random() * chars)]
-  .sort()
-  .map(pos => par.children[pos].classList.add('highlighting-target'));
+  .sort((a, b) => a - b)
+  .map((pos, i) => par.children[pos].classList.add(['highlighting-target-from', 'highlighting-target-to'][i]));
 
 let cursor = makeSpan();
 cursor.id = 'cursor';
@@ -53,12 +53,3 @@ par.insertBefore(cursor, par.children[rndpos]);
 //let pos = cursor.getAttribute('pos');
 //console.log('cursor is between "' + text.substr(pos-6, 6)
 //                       + '" and "' + text.substr(pos, 6) + '"');
-
-// TODO:
-// Per la selezione del testo una strategia sembra essere quella
-// di avvolgere ogni parola (anzi, nel mio caso ogni singolo carattere)
-// all'interno di uno <span>; questi avranno informazioni circa il loro
-// posizionamento orizzontale e verticale, le quali mi sono necessarie
-// a muovere il cursore opportunamente.
-// https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetLeft
-// https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop

@@ -6,6 +6,7 @@
   --dark-grey: #333333;
   --light-grey: #bbbbbb;
   --target: rgba(0, 255, 255, 15%);
+  --highlighted: rgba(0, 255, 255, 40%);
   --cursor-width: 1px;
   --cursor-color: cyan;
 }
@@ -22,11 +23,52 @@ body {
   padding: 1em;
 }
 
-.highlighting-target,
-.highlighting-target ~ span {
+span.highlighting-target-from,
+.highlighting-target-from ~ span {
   background-color: var(--target);
 }
 
-.highlighting-target ~ .highlighting-target ~ span {
+span.highlighting-target-to,
+.highlighting-target-to ~ span {
   background-color: initial;
 }
+
+.highlighting-target-from ~ span.blinking,
+.highlighting-target-from ~ .blinking ~ span {
+  background-color: var(--target);
+}
+
+.highlighting-target-from ~ .highlighting-target-to ~ span.blinking,
+.highlighting-target-from ~ .highlighting-target-to ~ .blinking ~ span {
+  background-color: initial;
+}
+
+span.currently-highlighted,
+.currently-highlighted ~ span {
+  background-color: var(--highlighted);
+}
+
+.blinking ~ span.highlighting-target-from,
+.blinking ~ .highlighting-target-from ~ span {
+  background-color: var(--target);
+}
+
+.blinking ~ span.highlighting-target-to,
+.blinking ~ .highlighting-target-to ~ span,
+span.blinking,
+.blinking ~ span,
+span.blinking.highlighting-target-to,
+.blinking.highlighting-target-to ~ span {
+  background-color: initial;
+}
+
+span.blinking.highlighting-target-from,
+.blinking.highlighting-target-from ~ span {
+  background-color: var(--target);
+}
+
+.blinking ~ span.highlighting-target-to,
+.blinking ~ .highlighting-target-to ~ span {
+  background-color: initial;
+}
+

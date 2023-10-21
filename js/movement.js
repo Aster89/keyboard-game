@@ -19,7 +19,18 @@ let higher_lefter = (elem, cur) => elem.offsetTop < cur.offsetTop && elem.offset
 let lower_rigther = (elem, cur) => elem.offsetTop > cur.offsetTop && elem.offsetLeft > cur.offsetLeft;
 let isspan = elem => elem.tagName == 'SPAN';
 
+let highlight_mode = false;
+
 function movecursor(e) {
+  if (e.shiftKey && !highlight_mode) {
+    highlight_mode = true;
+    start_highlighting();
+  }
+  if (!e.shiftKey && highlight_mode) {
+    highlight_mode = false;
+    remove_highlighting();
+  }
+  //console.log('e.shiftKey ? ' + e.shiftKey);
   if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
     let dir = e.key == 'ArrowLeft' ? -1 : 1;
     advance(e.ctrlKey ? stride(dir) : 1, dir);
@@ -48,3 +59,16 @@ function movecursor(e) {
     advance(offset + dir * (winner - (dir + 1)/2 - 1), dir);
   }
 }
+
+let highlighting_start = undefined;
+
+let start_highlighting = () => {
+  let tokens = document.getElementById('tokenized-text');
+  let curpos = Number(cursor.getAttribute('pos'));
+  highlighting_start = tokens.children[curpos + 1];
+  highlighting_start.classList.add('currently-highlighted');
+};
+
+let remove_highlighting = () => {
+  highlighting_start.classList.remove('currently-highlighted');
+};
