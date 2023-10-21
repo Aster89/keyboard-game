@@ -39,11 +39,11 @@ let chars = document.getElementById('tokenized-text').children.length;
 
 [Math.floor(Math.random() * chars), Math.floor(Math.random() * chars)]
   .sort((a, b) => a - b)
-  .map((pos, i) => par.children[pos].classList.add(['highlighting-target-from', 'highlighting-target-to'][i]));
+  .map((pos, i) => par.children[pos].classList.add(['target-beg', 'target-end'][i]));
 
 let cursor = makeSpan();
-cursor.id = 'cursor';
-cursor.classList.add('blinking');
+cursor.id = 'cursor';             // TODO: should I use only the id or only the class?
+cursor.classList.add('blinking'); // TODO: or cursor??
 
 let rndpos = Math.floor(Math.random() * chars);
 

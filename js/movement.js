@@ -30,7 +30,6 @@ function movecursor(e) {
     highlight_mode = false;
     remove_highlighting();
   }
-  //console.log('e.shiftKey ? ' + e.shiftKey);
   if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
     let dir = e.key == 'ArrowLeft' ? -1 : 1;
     advance(e.ctrlKey ? stride(dir) : 1, dir);
@@ -58,17 +57,25 @@ function movecursor(e) {
     let winner = displs.indexOf(Math.min(...displs));
     advance(offset + dir * (winner - (dir + 1)/2 - 1), dir);
   }
+  if (highlighting_start != undefined) {
+    let curpos = Number(par.children['cursor'].getAttribute('pos'));
+  }
 }
 
 let highlighting_start = undefined;
 
 let start_highlighting = () => {
+  cursor.classList.add('highlighted-end');
   let tokens = document.getElementById('tokenized-text');
   let curpos = Number(cursor.getAttribute('pos'));
   highlighting_start = tokens.children[curpos + 1];
-  highlighting_start.classList.add('currently-highlighted');
+  highlighting_start.classList.add('highlighted-beg');
 };
 
 let remove_highlighting = () => {
-  highlighting_start.classList.remove('currently-highlighted');
+  cursor.classList.remove('highlighted-end');
+  highlighting_start.classList.remove('highlighted-beg');
+  let tokens = document.getElementById('tokenized-text');
+  let curpos = Number(cursor.getAttribute('pos'));
+  highlighting_start = tokens.children[curpos + 1];
 };
