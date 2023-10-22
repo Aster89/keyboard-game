@@ -33,6 +33,8 @@ function movecursor(e) {
     let dir = e.key == 'ArrowLeft' ? -1 : 1;
     advance(e.ctrlKey ? stride(dir) : 1, dir);
   } else if (['ArrowUp', 'ArrowDown'].includes(e.key)) {
+    // TODO: the approach here is very inefficient,
+    // but I can do better.
     let cur = par.children['cursor'];
     let curpos = Number(cur.getAttribute('pos'));
     let offset = 0;
