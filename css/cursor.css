@@ -18,3 +18,7 @@
   border-color: cyan;
   margin-right: calc(-2 * var(--cursor-width));
 }
+
+.trailing-space {
+  display: flex;
+}
