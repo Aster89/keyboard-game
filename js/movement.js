@@ -70,6 +70,15 @@ function movecursor(e) {
       advance(Array.from(par.children)
         .slice(curpos)
         .findIndex(e => cur.offsetLeft > e.offsetLeft) - 1, 1);
+
+      // XXX: this is to make the cursor appear at the beginning of the newline
+      // when it is after the trailing space of a line
+      let trailingChar = par.children[Number(cur.getAttribute('pos')) - 1];
+      if (trailingChar.getInnerHTML() == ' ') {
+        trailingChar.classList.add('trailing-space');
+        advance(1, -1);
+      }
+      // TODO: make the cursor a class that can manage itself
     }
   }
   if (selection.active()) {
