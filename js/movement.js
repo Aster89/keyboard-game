@@ -1,4 +1,4 @@
-let movement_keys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+let movement_keys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
 
 function advance(steps, dir) {
   "use strict";
@@ -36,7 +36,7 @@ function movecursor(e) {
     let cur = par.children['cursor'];
     let curpos = Number(cur.getAttribute('pos'));
     let offset = 0;
-    if ('ArrowUp' == e.key) {
+    if (e.key == 'ArrowUp') {
       offset = Array.from(par.children)
         .slice(0, curpos)
         .reverse()
@@ -55,6 +55,22 @@ function movecursor(e) {
       .map(Math.abs);
     let winner = displs.indexOf(Math.min(...displs));
     advance(offset + dir * (winner - (dir + 1)/2 - 1), dir);
+  } else if (['Home', 'End'].includes(e.key)) {
+    let cur = par.children['cursor'];
+    let curpos = Number(cur.getAttribute('pos'));
+    if (e.key == 'Home') {
+      /* TODO: I need to allow the cursor to be at the beginning of the line as
+       * well as at the end
+      advance(Array.from(par.children)
+        .slice(0, curpos)
+        .reverse()
+        .findIndex(e => cur.offsetLeft < e.offsetLeft), -1);
+        */
+    } else {
+      advance(Array.from(par.children)
+        .slice(curpos)
+        .findIndex(e => cur.offsetLeft > e.offsetLeft) - 1, 1);
+    }
   }
   if (selection.active()) {
     let curpos = Number(par.children['cursor'].getAttribute('pos'));
