@@ -4,7 +4,8 @@ let selection = (function(){
     active: false,
     dir: 1,
     beg: undefined,
-    begin_pos: undefined
+    begin_pos: undefined,
+    tokens: document.getElementById('tokenized-text')
   };
   return {
     forward: () => impl.dir == 1,
@@ -14,10 +15,9 @@ let selection = (function(){
     start: () => {
       impl.active = true;
       cursor.classList.add('selection-end');
-      let tokens = document.getElementById('tokenized-text');
       let curpos = Number(cursor.getAttribute('pos'));
       impl.begin_pos = curpos + 1;
-      impl.beg = tokens.children[impl.begin_pos];
+      impl.beg = impl.tokens.children[impl.begin_pos];
       impl.beg.classList.add('selection-beg');
     },
     clear: () => {
@@ -27,18 +27,18 @@ let selection = (function(){
       impl.beg.classList.remove('selection-beg');
       impl.beg.classList.remove('selection-end');
       impl.dir = 1;
-      let tokens = document.getElementById('tokenized-text');
       let curpos = Number(cursor.getAttribute('pos'));
       impl.begin_pos = undefined;
-      impl.beg = tokens.children[curpos + 1];
+      impl.beg = impl.tokens.children[curpos + 1];
     },
     invert: () => {
       let end = document.getElementsByClassName('selection-end')[0];
-      end.classList.remove('selection-end');
       let beg = document.getElementsByClassName('selection-beg')[0];
+      end.classList.remove('selection-end');
       beg.classList.remove('selection-beg');
       end.classList.add('selection-beg');
       beg.classList.add('selection-end');
       impl.dir *= -1;
-    }}
+    }
+  };
 })();
