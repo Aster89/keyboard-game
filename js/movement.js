@@ -1,25 +1,14 @@
 let movement_keys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
 
-function advance(steps, dir) {
-  "use strict";
-  let offset = steps * dir;
-  let tokens = document.getElementById('tokenized-text');
-  let curpos = Number(cursor.getAttribute('pos'));
-  tokens.insertBefore(cursor, tokens.children[curpos + offset + (dir + 1)/2]);
-  cursor.setAttribute('pos', curpos + offset);
-}
-
 function stride(dir) {
   "use strict";
-  let curpos = Number(cursor.getAttribute('pos'));
   return dir == 1
-    ? RegExp(/^ *([a-zA-Z0-9]+|.|\n)/).exec(text.substr(curpos))[0].length
-    : RegExp(/([a-zA-Z0-9]+|.|\n) *$/).exec(text.substr(0, curpos))[0].length;
+    ? RegExp(/^ *([a-zA-Z0-9]+|.|\n)/).exec(text.plain().substr(cursor.pos()))[0].length
+    : RegExp(/([a-zA-Z0-9]+|.|\n) *$/).exec(text.plain().substr(0, cursor.pos()))[0].length;
 }
 
-let higher_lefter = (elem, cur) => elem.offsetTop < cur.offsetTop && elem.offsetLeft < cur.offsetLeft;
-let lower_rigther = (elem, cur) => elem.offsetTop > cur.offsetTop && elem.offsetLeft > cur.offsetLeft;
-let isspan = elem => elem.tagName == 'SPAN';
+let higher_lefter = (ch, cur) => ch.top < cur.top && ch.left < cur.left;
+let lower_rigther = (ch, cur) => ch.top > cur.top && ch.left > cur.left;
 
 function movecursor(e) {
   "use strict";
@@ -31,62 +20,58 @@ function movecursor(e) {
   }
   if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
     let dir = e.key == 'ArrowLeft' ? -1 : 1;
-    advance(e.ctrlKey ? stride(dir) : 1, dir);
+    cursor.advance(e.ctrlKey ? stride(dir) : 1, dir);
   } else if (['ArrowUp', 'ArrowDown'].includes(e.key)) {
     // TODO: the approach here is very inefficient,
     // but I can do better.
-    let cur = par.children['cursor'];
-    let curpos = Number(cur.getAttribute('pos'));
     let offset = 0;
     if (e.key == 'ArrowUp') {
-      offset = Array.from(par.children)
-        .slice(0, curpos)
+      offset = text.chars()
+        .slice(0, cursor.pos())
         .reverse()
-        .findIndex(elem => isspan(elem) && higher_lefter(elem, cur));
+        .findIndex(c => c.ch !== null && higher_lefter(c, cursor.screenOffset()));
     } else {
-      offset = Array.from(par.children)
-        .slice(curpos)
-        .findIndex(elem => isspan(elem) && lower_rigther(elem, cur));
+      offset = text.chars()
+        .slice(cursor.pos())
+        .findIndex(elem => c.ch !== null && lower_rigther(elem, cursor.screenOffset()));
     }
     let dir = e.key == 'ArrowUp' ? -1 : 1;
-    let candidates = [par.children[curpos + dir * offset - 1],
-                      par.children[curpos + dir * offset]];
+    let candidates = [text.chars()[cursor.pos() + dir * offset - 1],
+                      text.chars()[cursor.pos() + dir * offset]];
     let displs = candidates
-      .map(e => e.offsetLeft)
-      .map(minus(cur.offsetLeft))
+      .map(e => e.left)
+      .map(minus(cursor.screenOffset().left))
       .map(Math.abs);
     let winner = displs.indexOf(Math.min(...displs));
-    advance(offset + dir * (winner - (dir + 1)/2 - 1), dir);
+    cursor.advance(offset + dir * (winner - (dir + 1)/2 - 1), dir);
   } else if (['Home', 'End'].includes(e.key)) {
-    let cur = par.children['cursor'];
-    let curpos = Number(cur.getAttribute('pos'));
     if (e.key == 'Home') {
       /* TODO: I need to allow the cursor to be at the beginning of the line as
-       * well as at the end
-      advance(Array.from(par.children)
-        .slice(0, curpos)
+       * well as at the end, but without the need of hitting End on the
+       * previous line first
+      cursor.advance(text.chars()
+        .slice(0, cursor.pos())
         .reverse()
-        .findIndex(e => cur.offsetLeft < e.offsetLeft), -1);
+        .findIndex(c => cursor.screenOffset().left < c.left), -1);
         */
     } else {
-      advance(Array.from(par.children)
-        .slice(curpos)
-        .findIndex(e => cur.offsetLeft > e.offsetLeft) - 1, 1);
+      cursor.advance(
+        text.chars()
+            .slice(cursor.pos())
+            .findIndex(c => cursor.screenOffset().left > c.left) - 1, 1);
 
       // XXX: this is to make the cursor appear at the beginning of the newline
       // when it is after the trailing space of a line
-      let trailingChar = par.children[Number(cur.getAttribute('pos')) - 1];
-      if (trailingChar.getInnerHTML() == ' ') {
-        trailingChar.classList.add('trailing-space');
-        advance(1, -1);
+      let beforeCurs = cursor.pos() - 1;
+      if (text.chars()[beforeCurs].ch == ' ') {
+        text.markAsTrailSpace(beforeCurs);
+        cursor.advance(1, -1);
       }
-      // TODO: make the cursor a class that can manage itself
     }
   }
   if (selection.active()) {
-    let curpos = Number(par.children['cursor'].getAttribute('pos'));
-    if (selection.forward() && selection.begin_pos() > curpos
-      || selection.backward() && selection.begin_pos() <= curpos) {
+    if (selection.forward() && selection.begin_pos() > cursor.pos()
+      || selection.backward() && selection.begin_pos() <= cursor.pos()) {
       selection.invert();
     }
   }

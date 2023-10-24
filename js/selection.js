@@ -14,22 +14,19 @@ let selection = (function(){
     active: () => impl.active,
     start: () => {
       impl.active = true;
-      cursor.classList.add('selection-end');
-      let curpos = Number(cursor.getAttribute('pos'));
-      impl.begin_pos = curpos + 1;
+      cursor.makeEndOfSelection();
+      impl.begin_pos = cursor.pos() + 1;
       impl.beg = impl.tokens.children[impl.begin_pos];
       impl.beg.classList.add('selection-beg');
     },
     clear: () => {
       impl.active = false;
-      cursor.classList.remove('selection-beg'); // TODO: remove both or check
-      cursor.classList.remove('selection-end'); // TODO: and remove only one?
+      cursor.removeFromSelection();
       impl.beg.classList.remove('selection-beg');
       impl.beg.classList.remove('selection-end');
       impl.dir = 1;
-      let curpos = Number(cursor.getAttribute('pos'));
       impl.begin_pos = undefined;
-      impl.beg = impl.tokens.children[curpos + 1];
+      impl.beg = impl.tokens.children[cursor.pos() + 1];
     },
     invert: () => {
       let end = document.getElementsByClassName('selection-end')[0];
