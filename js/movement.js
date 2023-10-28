@@ -50,23 +50,19 @@ function movecursor(e) {
     cursor.advance(offset + dir * (winner - 1), dir);
   } else if (['Home', 'End'].includes(e.key)) {
     if (e.key == 'Home') {
-      /* TODO: I need to allow the cursor to be at the beginning of the line as
-       * well as at the end, but without the need of hitting End on the
-       * previous line first
-      // XXX: this is to make the cursor appear at the beginning of the newline
-      // when it is after the trailing space of a line
-      let beforeCurs = cursor.pos() - 1;
-      if (chars[beforeCurs].ch == ' ') {
-        text.markAsTrailSpace(beforeCurs);
-        cursor.advance(1, 1);
+      if (cursor.pos() == 0 || chars[cursor.pos() - 1].ch === null || (chars[cursor.pos()].ch !== null && chars[cursor.pos() - 1].left > cursor.screenOffset().left)) {
+        return;
       }
-      */
       cursor.advance(
         chars
           .slice(0, cursor.pos())
           .reverse()
-          .findIndex((c, i, o) =>  c.ch == null || c.left < o[i+1].left) + 1, -1);
+          .findIndex((c, i, o) =>
+            i == o.length - 1 || o[i+1].ch == null || c.left < o[i+1].left) + 1, -1);
     } else {
+      if (cursor.pos() == chars.length - 1) {
+        return;
+      }
       cursor.advance(
         chars
             .slice(cursor.pos())
