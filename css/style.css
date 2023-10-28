@@ -15,7 +15,6 @@
 body {
   background: var(--dark-grey);
   color: var(--light-grey);
-  font-variant-ligatures: none;
 }
 
 #tokenized-text {
@@ -23,5 +22,6 @@ body {
   font-size: 2em;
   margin: auto;
   padding: 1em;
+  font-variant-ligatures: none;
 }
 
