@@ -15,6 +15,7 @@
 body {
   background: var(--dark-grey);
   color: var(--light-grey);
+  font-variant-ligatures: none;
 }
 
 #tokenized-text {
