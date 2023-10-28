@@ -1,24 +1,21 @@
-.blinking::before {
+span.cursor,
+span:has(+ br.cursor)::after {
+  border-left: var(--cursor-width) solid var(--cursor-color);
   animation: blink-animation 1s steps(5, start) infinite;
   -webkit-animation: blink-animation 1s steps(5, start) infinite;
 }
 
+span.cursor {
+  margin-left: calc(-1 * var(--cursor-width));
+}
+
+span:has(+ br.cursor)::after {
+  content: "";
+}
+
 @keyframes blink-animation {
   to {
-    visibility: hidden;
+    border: none;
+    margin-left: inherit;
   }
-}
-
-span.cursor::before,
-span:has(+ br.cursor)::after {
-  position: relative; /* non sono sicuro di aver bisogno di questo */
-  content: "";
-  height: 1.2em;
-  margin-bottom: -0.2em;
-  border: var(--cursor-width) solid var(--cursor-color);
-  margin-right: calc(-2 * var(--cursor-width));
-}
-
-.trailing-space {
-  display: flex;
 }

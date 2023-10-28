@@ -6,7 +6,6 @@ let cursor = (function(){
   // initialize cursor
   let position = Math.floor(Math.random() * text.length());
   position = 252;
-  text.addClassAt('blinking', position);
   text.addClassAt('cursor', position);
   text.addPosAt(position);
 
@@ -16,10 +15,8 @@ let cursor = (function(){
       let offset = steps * dir;
       let newposition = position + offset;
       text.removeClassAt('cursor', position);
-      text.removeClassAt('blinking', position);
       text.removePosAt(position);
       text.addClassAt('cursor', newposition);
-      text.addClassAt('blinking', newposition);
       text.addPosAt(newposition);
       position += Number(offset);
     },
