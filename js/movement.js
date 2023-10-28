@@ -67,7 +67,6 @@ function movecursor(e) {
         chars
             .slice(cursor.pos())
             .findIndex((c, i, o) => c.ch == null || c.left > o[i+1].left), 1);
-
       if (chars[cursor.pos() + 1].ch == null) {
         cursor.advance(1, 1);
       }
