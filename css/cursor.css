@@ -1,4 +1,4 @@
-.blinking {
+.blinking::before {
   animation: blink-animation 1s steps(5, start) infinite;
   -webkit-animation: blink-animation 1s steps(5, start) infinite;
 }
@@ -9,13 +9,13 @@
   }
 }
 
-#cursor::after {
-  position: relative;
+span.cursor::before,
+span:has(+ br.cursor)::after {
+  position: relative; /* non sono sicuro di aver bisogno di questo */
   content: "";
   height: 1.2em;
   margin-bottom: -0.2em;
-  border: var(--cursor-width) solid #999;
-  border-color: cyan;
+  border: var(--cursor-width) solid var(--cursor-color);
   margin-right: calc(-2 * var(--cursor-width));
 }
 

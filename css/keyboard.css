@@ -16,7 +16,7 @@
 
 .key {
   height: var(--key-height);
-  border: 2px solid;
+  border: 2px solid; /* experiment with `outline` */
   display: block;
   min-width: var(--base-key-width);
   width: var(--base-key-width);

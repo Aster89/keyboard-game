@@ -1,30 +1,34 @@
 let cursor = (function(){
   "use strict";
 
-  let span = document.createElement('span');
-  span.id = 'cursor';
-  span.classList.add('blinking');
+  let chars = text.chars();
 
+  // initialize cursor
   let position = Math.floor(Math.random() * text.length());
-
-  span.setAttribute('pos', position);
-
-  text.insertAt(span, position);
-
-  let adjust = (offset, dir) => + offset + (dir + 1)/2;
+  position = 252;
+  text.addClassAt('blinking', position);
+  text.addClassAt('cursor', position);
+  text.addPosAt(position);
 
   return {
     pos: () => position,
     advance: (steps, dir) => {
       let offset = steps * dir;
-      text.insertAt(span, cursor.pos() + adjust(offset, dir));
+      let newposition = position + offset;
+      text.removeClassAt('cursor', position);
+      text.removeClassAt('blinking', position);
+      text.removePosAt(position);
+      text.addClassAt('cursor', newposition);
+      text.addClassAt('blinking', newposition);
+      text.addPosAt(newposition);
       position += Number(offset);
     },
-    screenOffset: () => ({ top: span.offsetTop, left: span.offsetLeft }),
-    makeEndOfSelection: () => { span.classList.add('selection-end'); },
+    screenOffset: () => ({ top: chars[position].top,
+                           left: chars[position].left }),
+    makeEndOfSelection: () => { text.addClassAt('selection-end', position); },
     removeFromSelection: () => {
-      span.classList.remove('selection-beg'); // TODO: remove both or check
-      span.classList.remove('selection-end'); // TODO: and remove only one?
+      text.removeClassAt('selection-beg', position); // TODO: remove both or check
+      text.removeClassAt('selection-end', position); // TODO: and remove only one?
     }
   };
 })();

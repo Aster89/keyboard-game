@@ -25,6 +25,14 @@ In bibendum, sem nec lacinia ornare, ex elit aliquam felis, accumsan aliquet met
   document.body.insertBefore(paragraph, keyboard);
 
   let addClassAt = (cl, pos) => { paragraph.children[pos].classList.add(cl); };
+  let removeClassAt = (cl, pos) => {
+    paragraph.children[pos].classList.remove(cl);
+    if (paragraph.children[pos].classList.length === 0) {
+      paragraph.children[pos].removeAttribute('class');
+    }
+  };
+  let setAttrAt = (key, val, pos) => { paragraph.children[pos].setAttribute(key, val); };
+  let removeAttrAt = (key, pos) => { paragraph.children[pos].removeAttribute(key); };
 
   return {
     plain: () => plain_text,
@@ -32,9 +40,12 @@ In bibendum, sem nec lacinia ornare, ex elit aliquam felis, accumsan aliquet met
                        .map(e => ({ ch: e.tagName == 'SPAN' ? e.getInnerHTML() : null,
                                     top: e.offsetTop,
                                     left: e.offsetLeft })),
+    // TODO: need a refreshChars to run at screen resize
     length: () => paragraph.children.length,
-    insertAt: (newnode, pos) => { paragraph.insertBefore(newnode, paragraph.children[pos]); },
     addClassAt: addClassAt,
+    removeClassAt: removeClassAt,
+    addPosAt: pos => setAttrAt('pos', pos, pos),
+    removePosAt: pos => removeAttrAt('pos', pos, pos),
     markAsTrailSpace: pos => addClassAt('trailing-space', pos)
   };
 })();
