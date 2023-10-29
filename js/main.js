@@ -49,3 +49,11 @@ async function getKey(e) {
 
 
 let keyboard = document.getElementsByTagName('body')[0].children[0];
+
+let text = makeText();
+
+makeTargetSelection(10, 20);
+
+let selection = makeSelection();
+
+let cursor = makeCursor();

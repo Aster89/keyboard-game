@@ -1,4 +1,4 @@
-let selection = (function(){
+function makeSelection() {
   "use strict";
   let active = false;
   let dir = 1;
@@ -19,4 +19,4 @@ let selection = (function(){
       }
     }
   };
-})();
+}

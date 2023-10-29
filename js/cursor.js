@@ -1,4 +1,4 @@
-let cursor = (function(){
+function makeCursor() {
   "use strict";
 
   let chars = text.chars();
@@ -23,4 +23,4 @@ let cursor = (function(){
     screenOffset: () => ({ top: chars[position].top,
                            left: chars[position].left }),
   };
-})();
+}

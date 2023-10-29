@@ -1,4 +1,4 @@
-let text = (function() {
+function makeText() {
 
   let makeSpan = text => {
     let s = document.createElement('span');
@@ -48,4 +48,4 @@ In bibendum, sem nec lacinia ornare, ex elit aliquam felis, accumsan aliquet met
     removePosAt: pos => removeAttrAt('pos', pos, pos),
     markAsTrailSpace: pos => addClassAt('trailing-space', pos)
   };
-})();
+}
