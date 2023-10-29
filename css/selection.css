@@ -1,5 +1,5 @@
-.target-beg,
-.target-beg ~ *:has(~ .target-end) {
+.target-selection-beg,
+.target-selection-beg ~ *:has(~ .target-selection-end) {
   background-color: var(--target);
 }
 
