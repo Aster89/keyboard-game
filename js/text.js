@@ -1,4 +1,5 @@
 function makeText() {
+  "use strict";
 
   let makeSpan = text => {
     let s = document.createElement('span');

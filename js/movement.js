@@ -20,7 +20,7 @@ function makeKeystrokeProcessor() {
       let chars = text.chars();
       if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
         let dir = e.key == 'ArrowLeft' ? -1 : 1;
-        if (dir == -1 && cursor.pos() == 0 || dir == 1 && text.length() == cursor.pos() + 1) {
+        if (dir == -1 && cursor.pos() == 0 || dir == 1 && cursor.pos() == text.length() - 1) {
           return;
         }
         cursor.advance(e.ctrlKey ? stride(dir) : 1, dir);
