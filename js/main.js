@@ -9,6 +9,9 @@ window.onkeyup = listenKeyUp;
 
 async function listenKeyDown(e) {
   "use strict";
+  if (e.repeat) {
+    return;
+  }
   press(await getKeyByEvent(e));
   if (movement_keys.includes(e.key)) {
     movecursor(e);
