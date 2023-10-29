@@ -7,8 +7,8 @@ function stride(dir) {
     : RegExp(/([a-zA-Z0-9]*|.|\n) *$/).exec(text.plain().substr(0, cursor.pos()))[0].length;
 }
 
-let higher_lefter = (ch, cur) => ch.top < cur.top && ch.left < cur.left;
-let lower_rigther = (ch, cur) => ch.top > cur.top && ch.left > cur.left;
+let higher_lefter = (ch, cur) => ch.top < cur.top && ch.left <= cur.left;
+let lower_rigther = (ch, cur) => ch.top > cur.top && ch.left >= cur.left;
 
 function movecursor(e) {
   "use strict";
@@ -32,9 +32,10 @@ function movecursor(e) {
         .reverse()
         .findIndex(c => c.ch !== null && higher_lefter(c, cursor.screenOffset()));
     } else {
-      offset = chars
-        .slice(cursor.pos())
-        .findIndex(elem => c.ch !== null && lower_rigther(elem, cursor.screenOffset()));
+      offset = Math.max(
+        chars.slice(cursor.pos())
+             .findIndex(elem => c.ch !== null && lower_rigther(elem, cursor.screenOffset())),
+        0);
     }
     let dir = e.key == 'ArrowUp' ? -1 : 1;
     let candidates = [chars[cursor.pos() + dir * offset - 1],
