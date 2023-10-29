@@ -12,11 +12,8 @@ let lower_rigther = (ch, cur) => ch.top > cur.top && ch.left > cur.left;
 
 function movecursor(e) {
   "use strict";
-  if (e.shiftKey && !selection.active()) {
-    selection.start();
-  }
-  if (!e.shiftKey && selection.active()) {
-    selection.clear();
+  if (e.shiftKey && !selection.active() || !e.shiftKey && selection.active()) {
+    selection.toggle();
   }
   let chars = text.chars();
   if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
@@ -70,12 +67,6 @@ function movecursor(e) {
       if (chars[cursor.pos() + 1].ch == null) {
         cursor.advance(1, 1);
       }
-    }
-  }
-  if (selection.active()) {
-    if (selection.forward() && selection.begin_pos() > cursor.pos()
-      || selection.backward() && selection.begin_pos() <= cursor.pos()) {
-      selection.invert();
     }
   }
 }

@@ -1,48 +1,14 @@
-span.target-beg,
-.target-beg ~ span {
+.target-beg,
+.target-beg ~ *:has(~ .target-end) {
   background-color: var(--target);
 }
 
-span.target-end,
-.target-end ~ span {
-  background-color: initial;
-}
-
-.target-beg ~ span.selection-end,
-.target-beg ~ .selection-end ~ span {
-  background-color: var(--target);
-}
-
-.target-beg ~ .target-end ~ span.selection-end,
-.target-beg ~ .target-end ~ .selection-end ~ span {
-  background-color: initial;
-}
-
-span.selection-beg,
-.selection-beg ~ span {
+.selection-anchor:has(~ .selection-head),
+.selection-anchor ~ *:has(~ .selection-head) {
   background-color: var(--selected);
 }
 
-.selection-end ~ span.target-beg,
-.selection-end ~ .target-beg ~ span {
-  background-color: var(--target);
-}
-
-.selection-end ~ span.target-end,
-.selection-end ~ .target-end ~ span,
-span.selection-end,
-.selection-end ~ span,
-span.selection-end.target-end,
-.selection-end.target-end ~ span {
-  background-color: initial;
-}
-
-span.selection-end.target-beg,
-.selection-end.target-beg ~ span {
-  background-color: var(--target);
-}
-
-.selection-end ~ span.target-end,
-.selection-end ~ .target-end ~ span {
-  background-color: initial;
+.selection-head:has(~ .selection-anchor),
+.selection-head ~ *:has(~ .selection-anchor) {
+  background-color: var(--selected);
 }
