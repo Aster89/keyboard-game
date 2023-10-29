@@ -12,12 +12,10 @@ let selection = (function(){
       if (active) {
         active = false;
         tokens[anchor].classList.remove('selection-anchor');
-        cursor.removeFromSelection();
       } else {
         active = true;
         anchor = cursor.pos();
         tokens[anchor].classList.add('selection-anchor');
-        cursor.makeEndOfSelection();
       }
     }
   };

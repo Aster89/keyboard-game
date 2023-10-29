@@ -3,12 +3,12 @@
   background-color: var(--target);
 }
 
-.selection-anchor:has(~ .selection-head),
-.selection-anchor ~ *:has(~ .selection-head) {
+.selection-anchor:has(~ .cursor),
+.selection-anchor ~ *:has(~ .cursor) {
   background-color: var(--selected);
 }
 
-.selection-head:has(~ .selection-anchor),
-.selection-head ~ *:has(~ .selection-anchor) {
+.cursor:has(~ .selection-anchor),
+.cursor ~ *:has(~ .selection-anchor) {
   background-color: var(--selected);
 }
