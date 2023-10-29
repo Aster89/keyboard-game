@@ -5,7 +5,7 @@ function makeCursor() {
 
   // initialize cursor
   let position = Math.floor(Math.random() * text.length());
-  position = 252;
+  position = 1;
   text.addClassAt('cursor', position);
   text.addPosAt(position);
 

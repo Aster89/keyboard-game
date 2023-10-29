@@ -20,32 +20,35 @@ In bibendum, sem nec lacinia ornare, ex elit aliquam felis, accumsan aliquet met
                          .concat(document.createElement('br')))
     .forEach(elem => { paragraph.appendChild(elem); });
 
-  console.assert(plain_text.length + 1/* trailing line break */ == paragraph.children.length);
+  let letters = paragraph.children;
 
-  document.body.insertBefore(paragraph, keyboard);
+  console.assert(plain_text.length + 1/* trailing line break */ == letters.length);
 
-  let addClassAt = (cl, pos) => { paragraph.children[pos].classList.add(cl); };
+  document.body.insertBefore(paragraph, document.getElementsByTagName('body')[0].children[0]);
+  let addClassAt = (cl, pos) => { letters[pos].classList.add(cl); };
   let removeClassAt = (cl, pos) => {
-    paragraph.children[pos].classList.remove(cl);
-    if (paragraph.children[pos].classList.length === 0) {
-      paragraph.children[pos].removeAttribute('class');
+    letters[pos].classList.remove(cl);
+    if (letters[pos].classList.length === 0) {
+      letters[pos].removeAttribute('class');
     }
   };
-  let setAttrAt = (key, val, pos) => { paragraph.children[pos].setAttribute(key, val); };
-  let removeAttrAt = (key, pos) => { paragraph.children[pos].removeAttribute(key); };
+  let setAttrAt = (key, val, pos) => { letters[pos].setAttribute(key, val); };
+  let removeAttrAt = (key, pos) => { letters[pos].removeAttribute(key); };
 
+  let lines = groupBy((x, y) => (x.tagName !== 'BR' && x.offsetLeft < y.offsetLeft) || y.tagName == 'BR')
+  (Array.from(document.getElementById('tokenized-text').children));
   return {
     plain: () => plain_text,
-    chars: () => Array.from(paragraph.children)
-                       .map(e => ({ ch: e.tagName == 'SPAN' ? e.getInnerHTML() : null,
-                                    top: e.offsetTop,
-                                    left: e.offsetLeft })),
+    chars: () => Array.from(letters)
+                      .map(e => ({ ch: e.tagName == 'SPAN' ? e.getInnerHTML() : null,
+                                   top: e.offsetTop,
+                                   left: e.offsetLeft })),
     // TODO: need a refreshChars to run at screen resize
-    length: () => paragraph.children.length,
+    length: () => letters.length,
     addClassAt: addClassAt,
     removeClassAt: removeClassAt,
     addPosAt: pos => setAttrAt('pos', pos, pos),
     removePosAt: pos => removeAttrAt('pos', pos, pos),
-    markAsTrailSpace: pos => addClassAt('trailing-space', pos)
+    lines: lines
   };
 }

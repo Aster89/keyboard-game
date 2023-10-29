@@ -7,14 +7,24 @@ window.onkeyup = listenKeyUp;
 // lascia Alt colorato. Succede non solo per Alt, ma anche per
 // Home/End e le 4 frecce. Non succede per Ctrl.
 
+let keystrokeProcessor = makeKeystrokeProcessor();
+
+let text = makeText();
+
+makeTargetSelection(10, 20);
+
+let selection = makeSelection();
+
+let cursor = makeCursor();
+
 async function listenKeyDown(e) {
   "use strict";
   if (e.repeat) {
     return;
   }
   press(await getKeyByEvent(e));
-  if (movement_keys.includes(e.key)) {
-    movecursor(e);
+  if (keystrokeProcessor.supportedKeys.includes(e.key)) {
+    keystrokeProcessor.movecursor(e);
   }
 }
 
@@ -46,14 +56,3 @@ async function getKey(e) {
   let maybe_key = await navigator.keyboard.getLayoutMap().then(klm => klm.get(e.code));
   return maybe_key ? maybe_key : e.key;
 }
-
-
-let keyboard = document.getElementsByTagName('body')[0].children[0];
-
-let text = makeText();
-
-makeTargetSelection(10, 20);
-
-let selection = makeSelection();
-
-let cursor = makeCursor();
